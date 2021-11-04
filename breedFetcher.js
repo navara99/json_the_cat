@@ -1,5 +1,5 @@
 const request = require("request");
-const breed = process.argv.splice(2)[0];
+
 
 const fetchBreedDescription = (breed, cb) => {
   const endPoint = `https://api.thecatapi.com/v1/breeds/search?q=${breed}`;
@@ -14,10 +14,5 @@ const fetchBreedDescription = (breed, cb) => {
     return cb(null, description);
   });
 };
-
-fetchBreedDescription(breed, (err, description) => {
-  const output = err ? err : description;
-  console.log(output);
-});
 
 module.exports = fetchBreedDescription;
