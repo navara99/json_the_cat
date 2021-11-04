@@ -1,22 +1,23 @@
 const request = require("request");
 const breed = process.argv.splice(2)[0];
 
-const getBreedDetails = (breed , errorHandler) => {
+const fetchBreedDescription = (breed, cb) => {
   const endPoint = `https://api.thecatapi.com/v1/breeds/search?q=${breed}`;
 
   request(endPoint, (err, res, body) => {
-    if (err) return errorHandler(err,breed);
+    if (err) return cb(err, null);
 
-    const data = JSON.parse(body);
+    const data = JSON.parse(body)[0];
+    if (!data) return cb(`Sorry, ${breed} was not found.`, null);
 
-    if (data.length === 0) return errorHandler(err, breed);
-
-    const description = data[0].description;
-    console.log(description);
+    const description = data.description;
+    return cb(null, description);
   });
 };
 
-getBreedDetails(breed , (err,breed)=> {
-  const output = err ? `Error details: ${err}` : `Sorry, we could not find information for the breed ${breed}.`;
+fetchBreedDescription(breed, (err, description) => {
+  const output = err ? err : description;
   console.log(output);
 });
+
+module.exports = fetchBreedDescription;
