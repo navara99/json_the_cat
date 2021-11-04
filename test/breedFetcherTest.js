@@ -16,11 +16,11 @@ describe('fetchBreedDescription', () => {
 
   it('returns an error for an invalid breed, via callback', (done) => {
     fetchBreedDescription('IAmInvalidBreed', (err, desc) => {
-      const errorMsg = `Sorry, IAmInvalidBreed was not found.`
+      const errorMsg = `Sorry, IAmInvalidBreed was not found.`;
       assert.equal(err ,errorMsg);
       assert.equal(desc, null);
       done();
     });
 
   });
-})
+});
