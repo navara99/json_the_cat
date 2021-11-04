@@ -17,6 +17,6 @@ const getBreedDetails = (breed , errorHandler) => {
 };
 
 getBreedDetails(breed , (err,breed)=> {
-  const output = err ? `Error details: ${err}` : `Sorry, we could not find information for the breed ${breed}.`
+  const output = err ? `Error details: ${err}` : `Sorry, we could not find information for the breed ${breed}.`;
   console.log(output);
-})
+});
